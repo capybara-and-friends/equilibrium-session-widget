@@ -1,7 +1,7 @@
 plugins {
   id 'com.android.library'
   id 'expo-module-gradle-plugin'
-  id 'org.jetbrains.kotlin.plugin.compose'
+  id 'org.jetbrains.kotlin.plugin.compose' version '2.1.20'
 }
 
 group = 'expo.modules.sessionwidget'
