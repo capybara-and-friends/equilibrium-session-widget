@@ -1,4 +1,4 @@
-<manifest package="expo.modules.sessionwidget">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="expo.modules.sessionwidget">
     <application>
         <receiver
             android:name=".SessionWidgetReceiver"
