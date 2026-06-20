@@ -1,7 +1,3 @@
 export type SessionWidgetModuleEvents = {
-  onChange: (params: ChangeEventPayload) => void;
-};
-
-export type ChangeEventPayload = {
-  value: string;
+  onSessionToggled: (event: { isActive: boolean }) => void;
 };
