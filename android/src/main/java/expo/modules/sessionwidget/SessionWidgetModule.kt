@@ -20,15 +20,40 @@ class SessionWidgetModule : Module() {
   private val receiver = object : BroadcastReceiver() {
     override fun onReceive(context: Context?, intent: Intent?) {
       if (intent?.action == ACTION_TOGGLE_SESSION) {
-        // Toggle state in SharedPreferences
+        val sessionType = intent.getStringExtra("sessionType") ?: return
+        
         context?.let { ctx ->
           val prefs = ctx.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-          val isActive = prefs.getBoolean("isActive", false)
-          prefs.edit().putBoolean("isActive", !isActive).apply()
+          val consumeActive = prefs.getBoolean("consumeActive", false)
+          val createActive = prefs.getBoolean("createActive", false)
+          
+          var newConsumeActive = consumeActive
+          var newCreateActive = createActive
+          var toggledActive = false
+          
+          if (sessionType == "consume") {
+              newConsumeActive = !consumeActive
+              toggledActive = newConsumeActive
+              if (newConsumeActive) {
+                  newCreateActive = false
+              }
+          } else if (sessionType == "create") {
+              newCreateActive = !createActive
+              toggledActive = newCreateActive
+              if (newCreateActive) {
+                  newConsumeActive = false
+              }
+          }
+          
+          prefs.edit()
+              .putBoolean("consumeActive", newConsumeActive)
+              .putBoolean("createActive", newCreateActive)
+              .apply()
           
           // Emit event to JS
           this@SessionWidgetModule.sendEvent("onSessionToggled", mapOf(
-            "isActive" to !isActive
+            "type" to sessionType,
+            "isActive" to toggledActive
           ))
           
           // Update the widget UI
@@ -63,10 +88,13 @@ class SessionWidgetModule : Module() {
       }
     }
 
-    Function("setSessionState") { isActive: Boolean ->
+    Function("setSessionState") { consumeActive: Boolean, createActive: Boolean ->
       val context = appContext.reactContext ?: return@Function
       val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-      prefs.edit().putBoolean("isActive", isActive).apply()
+      prefs.edit()
+          .putBoolean("consumeActive", consumeActive)
+          .putBoolean("createActive", createActive)
+          .apply()
       
       CoroutineScope(Dispatchers.Main).launch {
         SessionWidget().updateAll(context)
@@ -74,9 +102,12 @@ class SessionWidgetModule : Module() {
     }
 
     Function("getSessionState") { ->
-      val context = appContext.reactContext ?: return@Function false
+      val context = appContext.reactContext ?: return@Function mapOf("consumeActive" to false, "createActive" to false)
       val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-      return@Function prefs.getBoolean("isActive", false)
+      return@Function mapOf(
+          "consumeActive" to prefs.getBoolean("consumeActive", false),
+          "createActive" to prefs.getBoolean("createActive", false)
+      )
     }
   }
 }

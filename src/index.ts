@@ -1,17 +1,17 @@
 import { EventEmitter, EventSubscription } from 'expo-modules-core';
 import SessionWidgetModule from './SessionWidgetModule';
-import { SessionWidgetModuleEvents } from './SessionWidget.types';
+import { SessionType, SessionWidgetModuleEvents } from './SessionWidget.types';
 
-export function setSessionState(isActive: boolean): void {
-  return SessionWidgetModule.setSessionState(isActive);
+export function setSessionState(consumeActive: boolean, createActive: boolean): void {
+  return SessionWidgetModule.setSessionState(consumeActive, createActive);
 }
 
-export function getSessionState(): boolean {
+export function getSessionState(): { consumeActive: boolean; createActive: boolean } {
   return SessionWidgetModule.getSessionState();
 }
 
 const emitter = new EventEmitter<SessionWidgetModuleEvents>(SessionWidgetModule ?? null);
 
-export function addSessionToggledListener(listener: (event: { isActive: boolean }) => void): EventSubscription {
+export function addSessionToggledListener(listener: (event: { type: SessionType; isActive: boolean }) => void): EventSubscription {
   return emitter.addListener('onSessionToggled', listener);
 }

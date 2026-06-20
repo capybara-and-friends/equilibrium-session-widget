@@ -1,3 +1,5 @@
+export type SessionType = 'consume' | 'create';
+
 export type SessionWidgetModuleEvents = {
-  onSessionToggled: (event: { isActive: boolean }) => void;
+  onSessionToggled: (event: { type: SessionType; isActive: boolean }) => void;
 };
