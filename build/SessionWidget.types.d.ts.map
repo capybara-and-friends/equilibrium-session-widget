@@ -1,0 +1,1 @@
+{"version":3,"file":"SessionWidget.types.d.ts","sourceRoot":"","sources":["../src/SessionWidget.types.ts"],"names":[],"mappings":"AAAA,MAAM,MAAM,WAAW,GAAG,SAAS,GAAG,QAAQ,CAAC;AAE/C,MAAM,MAAM,yBAAyB,GAAG;IACtC,gBAAgB,EAAE,CAAC,KAAK,EAAE;QAAE,IAAI,EAAE,WAAW,CAAC;QAAC,QAAQ,EAAE,OAAO,CAAA;KAAE,KAAK,IAAI,CAAC;CAC7E,CAAC"}

@@ -1,0 +1,38 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="expo.modules.sessionwidget" >
+4
+5    <uses-sdk android:minSdkVersion="24" />
+6
+7    <application>
+7-->/Users/cuong/mobile/expo-session-widget/android/src/main/AndroidManifest.xml:2:5-16:19
+8        <receiver
+8-->/Users/cuong/mobile/expo-session-widget/android/src/main/AndroidManifest.xml:3:9-12:20
+9            android:name="expo.modules.sessionwidget.SessionWidgetReceiver"
+9-->/Users/cuong/mobile/expo-session-widget/android/src/main/AndroidManifest.xml:4:13-50
+10            android:exported="true" >
+10-->/Users/cuong/mobile/expo-session-widget/android/src/main/AndroidManifest.xml:5:13-36
+11            <intent-filter>
+11-->/Users/cuong/mobile/expo-session-widget/android/src/main/AndroidManifest.xml:6:13-8:29
+12                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+12-->/Users/cuong/mobile/expo-session-widget/android/src/main/AndroidManifest.xml:7:17-84
+12-->/Users/cuong/mobile/expo-session-widget/android/src/main/AndroidManifest.xml:7:25-81
+13            </intent-filter>
+14
+15            <meta-data
+15-->/Users/cuong/mobile/expo-session-widget/android/src/main/AndroidManifest.xml:9:13-11:63
+16                android:name="android.appwidget.provider"
+16-->/Users/cuong/mobile/expo-session-widget/android/src/main/AndroidManifest.xml:10:17-58
+17                android:resource="@xml/session_widget_info" />
+17-->/Users/cuong/mobile/expo-session-widget/android/src/main/AndroidManifest.xml:11:17-60
+18        </receiver>
+19
+20        <service
+20-->/Users/cuong/mobile/expo-session-widget/android/src/main/AndroidManifest.xml:13:9-15:40
+21            android:name="expo.modules.sessionwidget.SessionWidgetHeadlessService"
+21-->/Users/cuong/mobile/expo-session-widget/android/src/main/AndroidManifest.xml:14:13-57
+22            android:exported="false" />
+22-->/Users/cuong/mobile/expo-session-widget/android/src/main/AndroidManifest.xml:15:13-37
+23    </application>
+24
+25</manifest>

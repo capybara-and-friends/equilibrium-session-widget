@@ -1,0 +1,1 @@
+{"version":3,"file":"SessionWidget.types.js","sourceRoot":"","sources":["../src/SessionWidget.types.ts"],"names":[],"mappings":"","sourcesContent":["export type SessionType = 'consume' | 'create';\n\nexport type SessionWidgetModuleEvents = {\n  onSessionToggled: (event: { type: SessionType; isActive: boolean }) => void;\n};\n"]}

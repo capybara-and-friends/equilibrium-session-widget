@@ -1,5 +1,5 @@
 {
-  "name": "expo-session-widget",
+  "name": "equilibrium-session-widget",
   "version": "0.1.0",
   "description": "My new module",
   "main": "build/index.js",
@@ -16,16 +16,16 @@
   "keywords": [
     "react-native",
     "expo",
-    "expo-session-widget",
+    "equilibrium-session-widget",
     "SessionWidget"
   ],
-  "repository": "https://github.com/expo-session-widget",
+  "repository": "https://github.com/capybara-and-friends/equilibrium-session-widget",
   "bugs": {
-    "url": "https://github.com/expo-session-widget/issues"
+    "url": "https://github.com/capybara-and-friends/equilibrium-session-widget/issues"
   },
   "author": "Cuong <cuong@example.com> (https://github.com)",
   "license": "MIT",
-  "homepage": "https://github.com/expo-session-widget#readme",
+  "homepage": "https://github.com/capybara-and-friends/equilibrium-session-widget#readme",
   "dependencies": {},
   "devDependencies": {
     "@babel/core": "^7.26.0",
