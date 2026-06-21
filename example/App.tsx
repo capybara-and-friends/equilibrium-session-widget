@@ -1,25 +1,41 @@
 import * as SessionWidget from 'expo-session-widget';
-import { useEvent } from 'expo';
 import { Button, SafeAreaView, ScrollView, Text, View } from 'react-native';
 import { useEffect, useState } from 'react';
 
 export default function App() {
-  const [isActive, setIsActive] = useState(false);
+  const [state, setState] = useState<SessionWidget.SessionWidgetState>({
+    consumeActive: false,
+    createActive: false,
+    consumeSeconds: 0,
+    createSeconds: 0,
+  });
 
   useEffect(() => {
-    setIsActive(SessionWidget.getSessionState());
-    
+    setState(SessionWidget.getSessionState());
+
     const sub = SessionWidget.addSessionToggledListener((event) => {
-      setIsActive(event.isActive);
+      setState(SessionWidget.getSessionState());
+      console.log('Session widget toggled', event);
     });
-    
+
     return () => sub.remove();
   }, []);
 
-  const toggleSession = () => {
-    const newState = !isActive;
-    SessionWidget.setSessionState(newState);
-    setIsActive(newState);
+  const toggleSession = (type: 'consume' | 'create') => {
+    const currentState = SessionWidget.getSessionState();
+    const nextState = {
+      ...currentState,
+      consumeActive: type === 'consume' ? !currentState.consumeActive : false,
+      createActive: type === 'create' ? !currentState.createActive : false,
+    };
+
+    SessionWidget.setSessionState(
+      nextState.consumeActive,
+      nextState.createActive,
+      nextState.consumeSeconds,
+      nextState.createSeconds
+    );
+    setState(SessionWidget.getSessionState());
   };
 
   return (
@@ -28,9 +44,13 @@ export default function App() {
         <Text style={styles.header}>Session Widget Test</Text>
         <Group name="State">
           <Text style={{ fontSize: 20, marginBottom: 20 }}>
-            Session is: {isActive ? 'ACTIVE' : 'INACTIVE'}
+            Consume: {state.consumeActive ? 'ACTIVE' : 'INACTIVE'} ({state.consumeSeconds}s)
           </Text>
-          <Button title={isActive ? "Stop Session" : "Start Session"} onPress={toggleSession} />
+          <Text style={{ fontSize: 20, marginBottom: 20 }}>
+            Create: {state.createActive ? 'ACTIVE' : 'INACTIVE'} ({state.createSeconds}s)
+          </Text>
+          <Button title="Toggle Consume" onPress={() => toggleSession('consume')} />
+          <Button title="Toggle Create" onPress={() => toggleSession('create')} />
         </Group>
       </ScrollView>
     </SafeAreaView>

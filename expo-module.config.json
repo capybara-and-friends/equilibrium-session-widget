@@ -1,4 +1,5 @@
 {
+  "coreFeatures": ["compose"],
   "platforms": ["android"],
   "android": {
     "modules": ["expo.modules.sessionwidget.SessionWidgetModule"]

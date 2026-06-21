@@ -10,5 +10,8 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/session_widget_info" />
         </receiver>
+        <service
+            android:name=".SessionWidgetHeadlessService"
+            android:exported="false" />
     </application>
 </manifest>
