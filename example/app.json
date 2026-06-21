@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "expo-session-widget-example",
-    "slug": "expo-session-widget-example",
+    "name": "equilibrium-session-widget-example",
+    "slug": "equilibrium-session-widget-example",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

@@ -20,7 +20,7 @@ config.resolver.nodeModulesPaths = [
 ];
 
 config.resolver.extraNodeModules = {
-  'expo-session-widget': '..',
+  'equilibrium-session-widget': '..',
 };
 
 config.watchFolders = [path.resolve(__dirname, '..')];
