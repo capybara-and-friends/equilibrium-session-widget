@@ -1,9 +1,0 @@
-expo.modules.sessionwidget
-drawable ic_more_vert
-drawable ic_play
-drawable ic_scale
-drawable ic_stop
-id chronometer
-layout widget_chronometer_consume
-layout widget_chronometer_create
-xml session_widget_info

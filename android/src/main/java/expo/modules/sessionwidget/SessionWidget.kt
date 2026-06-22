@@ -44,6 +44,7 @@ import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.longPreferencesKey
 import androidx.glance.appwidget.action.actionStartActivity
 import android.content.Intent
+import android.content.ComponentName
 
 val sessionTypeKey = ActionParameters.Key<String>("sessionType")
 val consumeActiveKey = booleanPreferencesKey("consumeActive")
@@ -69,7 +70,13 @@ class SessionWidget : GlanceAppWidget() {
                     .fillMaxSize()
                     .background(ColorProvider(Color(0xFFF8FAFC)))
                     .padding(16.dp)
-                    .clickable(actionRunCallback<OpenAppAction>()),
+                    .clickable(
+                        actionStartActivity(
+                            Intent().apply {
+                                component = ComponentName(context.packageName, "${context.packageName}.MainActivity")
+                            }
+                        )
+                    ),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
@@ -310,21 +317,6 @@ class ToggleSessionAction : ActionCallback {
         }
 
         return ((now - startedAt) / 1000L).toInt()
-    }
-}
-
-class OpenAppAction : ActionCallback {
-    override suspend fun onAction(
-        context: Context,
-        glanceId: GlanceId,
-        parameters: ActionParameters
-    ) {
-        val intent = context.packageManager.getLaunchIntentForPackage(context.packageName)?.apply {
-            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        }
-        if (intent != null) {
-            context.startActivity(intent)
-        }
     }
 }
 
