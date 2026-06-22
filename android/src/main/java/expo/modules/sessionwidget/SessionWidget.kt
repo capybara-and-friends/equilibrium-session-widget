@@ -69,11 +69,7 @@ class SessionWidget : GlanceAppWidget() {
                     .fillMaxSize()
                     .background(ColorProvider(Color(0xFFF8FAFC)))
                     .padding(16.dp)
-                    .clickable(
-                        actionStartActivity(
-                            context.packageManager.getLaunchIntentForPackage(context.packageName) ?: Intent()
-                        )
-                    ),
+                    .clickable(actionRunCallback<OpenAppAction>()),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
@@ -316,3 +312,19 @@ class ToggleSessionAction : ActionCallback {
         return ((now - startedAt) / 1000L).toInt()
     }
 }
+
+class OpenAppAction : ActionCallback {
+    override suspend fun onAction(
+        context: Context,
+        glanceId: GlanceId,
+        parameters: ActionParameters
+    ) {
+        val intent = context.packageManager.getLaunchIntentForPackage(context.packageName)?.apply {
+            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        }
+        if (intent != null) {
+            context.startActivity(intent)
+        }
+    }
+}
+
