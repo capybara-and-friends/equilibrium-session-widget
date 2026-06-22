@@ -42,6 +42,8 @@ import android.widget.RemoteViews
 import android.os.SystemClock
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.longPreferencesKey
+import androidx.glance.appwidget.action.actionStartActivity
+import android.content.Intent
 
 val sessionTypeKey = ActionParameters.Key<String>("sessionType")
 val consumeActiveKey = booleanPreferencesKey("consumeActive")
@@ -66,7 +68,12 @@ class SessionWidget : GlanceAppWidget() {
                 modifier = GlanceModifier
                     .fillMaxSize()
                     .background(ColorProvider(Color(0xFFF8FAFC)))
-                    .padding(16.dp),
+                    .padding(16.dp)
+                    .clickable(
+                        actionStartActivity(
+                            context.packageManager.getLaunchIntentForPackage(context.packageName) ?: Intent()
+                        )
+                    ),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
