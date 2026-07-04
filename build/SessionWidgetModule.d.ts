@@ -1,14 +1,3 @@
-import { NativeModule } from 'expo';
-import { SessionWidgetModuleEvents } from './SessionWidget.types';
-declare class SessionWidgetModule extends NativeModule<SessionWidgetModuleEvents> {
-    setSessionState(consumeActive: boolean, createActive: boolean, consumeSeconds: number, createSeconds: number): void;
-    getSessionState(): {
-        consumeActive: boolean;
-        createActive: boolean;
-        consumeSeconds: number;
-        createSeconds: number;
-    };
-}
-declare const _default: SessionWidgetModule;
-export default _default;
+declare let SessionWidgetModuleInstance: any;
+export default SessionWidgetModuleInstance;
 //# sourceMappingURL=SessionWidgetModule.d.ts.map
