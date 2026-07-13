@@ -1,7 +1,7 @@
 {
-  "name": "equilibrium-session-widget",
+  "name": "@capybara-and-friends/equilibrium-session-widget",
   "version": "0.1.0",
-  "description": "My new module",
+  "description": "Session widget for equilibrium",
   "main": "build/index.js",
   "types": "build/index.d.ts",
   "scripts": {
@@ -23,7 +23,7 @@
   "bugs": {
     "url": "https://github.com/capybara-and-friends/equilibrium-session-widget/issues"
   },
-  "author": "Cuong <cuong@example.com> (https://github.com)",
+  "author": "Cuong mcuongng@gmail.com",
   "license": "MIT",
   "homepage": "https://github.com/capybara-and-friends/equilibrium-session-widget#readme",
   "dependencies": {},
